@@ -4,7 +4,7 @@ import { Delete, Edit, EventNote } from '@material-ui/icons';
 
 import TaskForm from '../taskForm/TaskForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsModalOpen, handleModalOpen, selectTask } from '../taskSlice';
+import { selectIsModalOpen, handleModalOpen, selectTask, completeTask, deleteTask } from '../taskSlice';
 
 interface PropTypes {
   task: { id: number; title: string; completed: boolean };
@@ -40,12 +40,12 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
       >
         <Checkbox
           checked={task.completed}
-          onClick={() => console.log(`check ${task.id}`)}
+          onClick={() => dispatch(completeTask(task))}
         />
         <IconButton onClick={handleOpen}>
           <Edit sx={{ color: '#282828' }} />
         </IconButton>
-        <IconButton onClick={() => console.log(`delete ${task.id}`)}>
+        <IconButton onClick={() => dispatch(deleteTask(task))}>
           <Delete sx={{ color: '#282828' }} />
         </IconButton>
       </Box>
